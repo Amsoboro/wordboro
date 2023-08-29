@@ -9,7 +9,7 @@ function appStart() {
     const div = document.createElement("div");
     div.innerText = "게임이 종료됐습니다.";
     div.style =
-      "display:flex; justify-content:center; align-items:center; position:absolute; top:40vh; left:35vw; background-color:white; width:200px; heigth:100px";
+      "display:flex; justify-content:center; align-items:center; position:absolute; top:40vh; background-color:white; width:200px; heigth:100px";
     document.body.appendChild(div);
   };
   const nextLine = () => {
