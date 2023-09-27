@@ -33,6 +33,7 @@ function appStart() {
       const 정답_글자 = 정답[i];
       if (입력한_글자 === 정답_글자) {
         맞은_갯수++;
+        block.classList.add("correct");
         block.style.background = "#6AAA64";
       } else if (정답.includes(입력한_글자)) block.style.background = "#C9B458";
       else block.style.background = "#787C7E";
