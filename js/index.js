@@ -13,9 +13,9 @@ function appStart() {
     document.body.appendChild(div);
   };
   const nextLine = () => {
-    if (attempts === 6) return gameover();
     attempts++;
     index = 0;
+    if (attempts === 6) return gameover();
   };
   const gameover = () => {
     window.removeEventListener("keydown", handleKeydown);
@@ -38,6 +38,19 @@ function appStart() {
       else block.style.background = "#787C7E";
 
       block.style.color = "white";
+
+      const keyboardkey = document.querySelector(
+        `.keyboard-block[data-key='${정답_글자}']`
+      ); //정답_글자와 일치하는 키보드 블럭을 가져와서 키보드키에 저장
+      if (keyboardkey) {
+        if (입력한_글자 === 정답_글자) {
+          keyboardkey.style.background = "#6AAA64";
+        } else if (정답.includes(입력한_글자))
+          keyboardkey.style.background = "#C9B458";
+        else keyboardkey.style.background = "#787C7E";
+
+        keyboardkey.style.color = "white";
+      } //여기까지 블럭 색 변경과 동일
     }
 
     if (맞은_갯수 === 5) gameover();
@@ -70,6 +83,24 @@ function appStart() {
       index++;
     }
   };
+
+  const keyboardElements = document.querySelectorAll(".keyboard-block"); // 하단 키보드 배열 엘리먼트 선택
+
+  // 하단 키보드 배열 엘리먼트에 클릭 이벤트 리스너 추가
+
+  keyboardElements.forEach((keyboardElement) => {
+    keyboardElement.addEventListener("click", () => {
+      const 입력한_글자 = keyboardElement.innerText; // 클릭한 키보드 블럭의 내용 가져오기
+      const thisBlock = document.querySelector(
+        `.board-block[data-index='${attempts}${index}']`
+      );
+
+      if (index < 5) {
+        thisBlock.innerText = 입력한_글자; // 클릭한 키보드 블럭의 내용을 현재 입력 중인 board-block에 추가
+        index++;
+      }
+    });
+  });
 
   const startTimer = () => {
     const 시작_시간 = new Date();
